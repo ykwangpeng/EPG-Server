@@ -20,10 +20,9 @@ document.getElementById('settingsForm').addEventListener('submit', function(even
     const fields = ['update_config', 'gen_xml', 'include_future_only', 'channel_fuzzy_match', 'ret_default', 'cht_to_chs', 'db_type', 
         'mysql_host', 'mysql_dbname', 'mysql_username', 'mysql_password', 'cached_type', 'gen_list_enable', 'check_update', 
         'token_range', 'user_agent_range', 'notify', 'access_log_enable', 'target_time_zone', 'ip_list_mode', 'live_source_config', 
-        'live_template_enable', 'live_fuzzy_match', 'live_url_comment', 'live_tvg_logo_enable', 'live_tvg_id_enable', 
-        'live_tvg_name_enable', 'live_source_auto_sync', 'live_channel_name_process', 'gen_live_update_time', 'm3u_icon_first', 
-        'ku9_secondary_grouping', 'tag_gen_mode', 'check_speed_filter', 'min_resolution_width', 'min_resolution_height', 'urls_limit', 
-        'sort_by_delay', 'check_speed_auto_sync', 'check_speed_interval_factor'];
+        'live_url_comment', 'live_tvg_logo_enable', 'live_tvg_id_enable', 'live_tvg_name_enable', 'live_source_auto_sync', 
+        'live_channel_name_process', 'gen_live_update_time', 'm3u_icon_first', 'ku9_secondary_grouping', 'tag_gen_mode', 'check_speed_filter', 
+        'min_resolution_width', 'min_resolution_height', 'urls_limit', 'sort_by_delay', 'check_speed_auto_sync', 'check_speed_interval_factor'];
 
     // 创建隐藏字段并将其添加到表单
     const form = this;
@@ -1880,11 +1879,11 @@ function saveLiveTemplate() {
     // 保存配置
     liveTemplateEnable = document.getElementById('live_template_enable').value;
     liveFuzzyMatch = document.getElementById('live_fuzzy_match').value;
-    liveUrlComment = document.getElementById('live_url_comment').value;
+    liveChannelNameMode = document.getElementById('live_channel_name_mode').value;
     saveConfigField({
         live_template_enable: liveTemplateEnable,
         live_fuzzy_match: liveFuzzyMatch,
-        live_url_comment: liveUrlComment
+        live_channel_name_mode: liveChannelNameMode
     });
 
     // 内容写入 template.json 文件

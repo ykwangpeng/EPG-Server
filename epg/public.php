@@ -1245,18 +1245,42 @@ function generateLiveFiles($channelData, $fileName, $saveOnly = false) {
                         $cleanChsChannelName = cleanChannelName($chsChannelName);
 
                         // CGTN 和 CCTV 不进行模糊匹配
-                        if ($channelName === $groupChannelName || 
-                            ($fuzzyMatchingEnable && ($cleanChsChannelName === $cleanChsGroupChannelName || 
-                            stripos($cleanChsGroupChannelName, 'CGTN') === false && stripos($cleanChsGroupChannelName, 'CCTV') === false && !empty($cleanChsChannelName) && 
-                            (stripos($cleanChsChannelName, $cleanChsGroupChannelName) || stripos($cleanChsGroupChannelName, $cleanChsChannelName)) || 
-                            (strpos($groupChannelName, 'regex:') === 0) && @preg_match(substr($groupChannelName, 6), $channelName . $cleanChsChannelName)))) {
+                        if (
+                            $channelName === $groupChannelName ||
+                            (
+                                $fuzzyMatchingEnable &&
+                                (
+                                    $cleanChsChannelName === $cleanChsGroupChannelName ||
+                                    (
+                                        stripos($cleanChsGroupChannelName, 'CGTN') === false &&
+                                        stripos($cleanChsGroupChannelName, 'CCTV') === false &&
+                                        !empty($cleanChsChannelName) &&
+                                        (
+                                            stripos($cleanChsChannelName, $cleanChsGroupChannelName) !== false ||
+                                            stripos($cleanChsGroupChannelName, $cleanChsChannelName) !== false
+                                        )
+                                    ) ||
+                                    (
+                                        strpos($groupChannelName, 'regex:') === 0 &&
+                                        @preg_match(substr($groupChannelName, 6), $channelName . $cleanChsChannelName)
+                                    )
+                                )
+                            )
+                        ) {
                             // 更新信息
                             $extInfOptStr = extractExtInfOpt($streamUrl);
                             $m3uStreamUrl = $streamUrl . (($m3uCommentEnabled && strpos($streamUrl, '$') === false) ? "\${$groupPrefix}{$groupTitle}" : "");
                             $rowGroupTitle = $templateGroupTitle === 'default' ? $groupPrefix . $groupTitle : $templateGroupTitle;
                             $row['groupTitle'] = $rowGroupTitle;
                             $row['rawGroupTitle'] = $groupTitle;
-                            $finalChannelName = strpos($groupChannelName, 'regex:') === 0 ? $channelName : $groupChannelName; // 正则表达式使用原频道名
+
+                            // 频道名模式
+                            $isOriginalNameMode = ($Config['live_channel_name_mode'] ?? 0) == 1;
+                            $isRegexChannel = strpos($groupChannelName, 'regex:') === 0;
+                            $finalChannelName = ($isOriginalNameMode || $isRegexChannel)
+                                ? $channelName   // 原始频道名
+                                : $groupChannelName; // 模板频道名
+
                             $row['channelName'] = $finalChannelName;
 
                             // 过滤重复数据

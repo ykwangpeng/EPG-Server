@@ -39,6 +39,7 @@
     "live_tvg_id_enable": 1,
     "live_tvg_name_enable": 1,
     "live_fuzzy_match": 1,
+    "live_channel_name_mode": 0,
     "gen_live_update_time": 0,
     "m3u_icon_first": 0,
     "live_url_comment": 0,
