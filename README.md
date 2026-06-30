@@ -1,8 +1,8 @@
 # 📺 IPTV工具箱
 <div align="center">
 
-<a href="https://trendshift.io/repositories/12969" target="_blank">
-  <img src="https://trendshift.io/api/badge/repositories/12969" alt="IPTV Tool | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
+<a href="https://trendshift.io/repositories/15130" target="_blank">
+  <img src="https://trendshift.io/api/badge/repositories/15130" alt="IPTV Tool | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
 </a>
 
 [![GitHub Stars](https://img.shields.io/github/stars/taksssss/iptv-tool?style=social)](https://github.com/taksssss/iptv-tool/stargazers)

@@ -505,6 +505,11 @@
                 </select>
             </div>
             <div class="column">
+                <label for="live_channel_name_mode">频道名称：</label>
+                <select id="live_channel_name_mode" name="live_channel_name_mode" required>
+                    <option value="0" <?php if (($Config['live_channel_name_mode'] ?? 0) == 0) echo 'selected'; ?>>模板名</option>
+                    <option value="1" <?php if (($Config['live_channel_name_mode'] ?? 0) == 1) echo 'selected'; ?>>原始名</option>
+                </select>
             </div>
             <div class="column">
             </div>

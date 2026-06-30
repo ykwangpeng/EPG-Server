@@ -323,9 +323,10 @@ function liveFetchHandler($query_params) {
     }
 
     // 处理 TVG URL 替换
-    $tvgUrlToken = ($tokenRange == "2" || $tokenRange == "3") ? "&token=$token" : '';
+    $needToken = ($tokenRange == "2" || $tokenRange == "3");
     $xmlPath = ($_SERVER['REWRITE_ENABLE'] ?? 0) ? '/t.xml.gz' : '/index.php?type=gz';
-    $tvgUrl = $serverUrl . $xmlPath . $tvgUrlToken;
+    $sep = (strpos($xmlPath, '?') !== false) ? '&' : '?';
+    $tvgUrl = $serverUrl . $xmlPath . ($needToken ? $sep . "token=$token" : '');
     if ($queryType === 'm3u') {
         $content = preg_replace('/(#EXTM3U x-tvg-url=")(.*?)(")/', '$1' . $tvgUrl . '$3', $content, 1);
         $content = str_replace("tvg-logo=\"/data/icon/", "tvg-logo=\"$serverUrl/data/icon/", $content);
